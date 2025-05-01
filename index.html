@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Among Us - Tripulante com HTML e CSS</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #232526;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #ffffff;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .container {
+            position: relative;
+            width: 300px;
+            height: 400px;
+        }
+
+        /* Corpo principal */
+        .body {
+            position: absolute;
+            width: 200px;
+            height: 250px;
+            background-color: #ff0000;
+            border-radius: 100px 100px 70px 70px;
+            top: 100px;
+            left: 50px;
+            z-index: 1;
+        }
+
+        /* Pernas */
+        .leg {
+            position: absolute;
+            width: 70px;
+            height: 130px;
+            background-color: #ff0000;
+            border-radius: 0 0 25px 25px;
+            bottom: 0;
+            z-index: 1;
+            top: 280px;
+        }
+
+        .leg-left {
+            left: 50px;
+
+
+        }
+
+        .leg-right {
+            right: 50px;
+
+
+        }
+
+        /* Visor */
+        .visor {
+            position: absolute;
+            width: 120px;
+            height: 70px;
+            background-color: #99dbf5;
+            border-radius: 40px 70px 40px 40px;
+            top: 80px;
+            left: 100px;
+            z-index: 2;
+            margin-top: 65px;
+        }
+
+        /* Reflexo do visor */
+        .reflection {
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            top: 15px;
+            left: 15px;
+            z-index: 3;
+            opacity: 0.7;
+        }
+
+        /* Mochila */
+        .backpack {
+            position: absolute;
+            width: 70px;
+            height: 120px;
+            background-color: #cc0000;
+            border-radius: 20px;
+            top: 150px;
+            left: 10px;
+            z-index: 0;
+        }
+
+        /* Sombra */
+        .shadow {
+            position: absolute;
+            width: 220px;
+            height: 45px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            bottom: -20px;
+            left: 40px;
+            z-index: 0;
+        }
+
+        /* Botões de cor */
+        .color-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            gap: 10px;
+        }
+
+        .color-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid #ffffff;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .color-btn:hover {
+            transform: scale(1.1);
+        }
+
+        #red {
+            background-color: #ff0000;
+        }
+
+        #blue {
+            background-color: #0000ff;
+        }
+
+        #green {
+            background-color: #00ff00;
+        }
+
+        #yellow {
+            background-color: #ffff00;
+        }
+
+        #purple {
+            background-color: #800080;
+        }
+
+        footer {
+            margin-top: 50px;
+            color: #ffffff;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tripulante do Among Us<br>Criado com HTML e CSS</h1>
+    
+    <div class="container">
+        <!-- Sombra -->
+        <div class="shadow"></div>
+        
+        <!-- Mochila -->
+        <div class="backpack"></div>
+        
+        <!-- Corpo principal -->
+        <div class="body"></div>
+        
+        <!-- Pernas -->
+        <div class="leg leg-left"></div>
+        <div class="leg leg-right"></div>
+        
+        <!-- Visor -->
+        <div class="visor">
+            <div class="reflection"></div>
+        </div>
+    </div>
+
+    <div class="color-buttons">
+        <div class="color-btn" id="red" onclick="changeColor('#ff0000')"></div>
+        <div class="color-btn" id="blue" onclick="changeColor('#0000ff')"></div>
+        <div class="color-btn" id="green" onclick="changeColor('#00ff00')"></div>
+        <div class="color-btn" id="yellow" onclick="changeColor('#ffff00')"></div>
+        <div class="color-btn" id="purple" onclick="changeColor('#800080')"></div>
+    </div>
+
+    <footer>
+        <p>Exemplo educacional para demonstrar HTML e CSS</p>
+    </footer>
+
+    <script>
+        function changeColor(color) {
+            document.querySelector('.body').style.backgroundColor = color;
+            document.querySelector('.leg-left').style.backgroundColor = color;
+            document.querySelector('.leg-right').style.backgroundColor = color;
+            
+            // Ajustar a cor da mochila para ser um pouco mais escura
+            let darkColor = color;
+            if (color === '#ff0000') darkColor = '#cc0000';
+            if (color === '#0000ff') darkColor = '#0000cc';
+            if (color === '#00ff00') darkColor = '#00cc00';
+            if (color === '#ffff00') darkColor = '#cccc00';
+            if (color === '#800080') darkColor = '#600060';
+            
+            document.querySelector('.backpack').style.backgroundColor = darkColor;
+        }
+    </script>
+</body>
+</html>
