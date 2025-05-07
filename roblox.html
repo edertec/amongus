@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixel Art Roblox</title>
+  <style>
+    /* Estilo para o corpo da página */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      font-family: 'Arial', sans-serif;
+      flex-direction: column;
+    }
+
+    /* Container principal que segura nossa pixel art */
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px;
+    }
+
+    /* Título do nosso projeto */
+    h1 {
+      color: #ff7800;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    /* A "tela" onde nossa pixel art será desenhada */
+    .pixel-art {
+      display: grid;
+      grid-template-rows: repeat(20, 15px); /* 20 linhas com 15px cada */
+      grid-template-columns: repeat(20, 15px); /* 20 colunas com 15px cada */
+      gap: 1px; /* Pequeno espaço entre os pixels */
+      background-color: #333;
+      border: 5px solid #666;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Cada célula da grade será um pixel */
+    .pixel {
+      width: 15px;
+      height: 15px;
+    }
+
+    /* Legenda das cores usadas */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+      max-width: 500px;
+    }
+
+    /* Cada item da legenda */
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin: 5px 10px;
+    }
+
+    /* Amostra de cor na legenda */
+    .color-sample {
+      width: 15px;
+      height: 15px;
+      margin-right: 5px;
+      border: 1px solid #333;
+    }
+
+    /* Explicação de cada cor */
+    .color-name {
+      font-size: 12px;
+    }
+
+    /* Cores específicas que usaremos para criar nosso pixel art */
+    .sky { background-color: #87CEEB; } /* Cor do céu */
+    .cloud { background-color: #FFFFFF; } /* Cor das nuvens */
+    .grass { background-color: #7CFC00; } /* Cor da grama */
+    .dirt { background-color: #8B4513; } /* Cor da terra */
+    .stone { background-color: #A9A9A9; } /* Cor da pedra */
+    .wood { background-color: #DEB887; } /* Cor da madeira */
+    .char-head { background-color: #FFD700; } /* Cabeça do personagem do Roblox */
+    .char-body { background-color: #FF0000; } /* Corpo do personagem do Roblox */
+    .char-arm { background-color: #FFD700; } /* Braços do personagem do Roblox */
+    .char-leg { background-color: #0000FF; } /* Pernas do personagem do Roblox */
+    .shadow { background-color: rgba(0, 0, 0, 0.3); } /* Sombras */
+    .water { background-color: #1E90FF; } /* Água */
+    .tree { background-color: #228B22; } /* Árvore */
+    .flower-red { background-color: #FF4500; } /* Flor vermelha */
+    .flower-yellow { background-color: #FFFF00; } /* Flor amarela */
+    .black { background-color: #000000; } /* Preto para detalhes */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Pixel Art Roblox</h1>
+    <!-- Aqui está o grid que representa nossa pixel art -->
+    <div class="pixel-art" id="pixel-grid">
+      <!-- Os pixels serão inseridos via JavaScript -->
+    </div>
+    
+    <!-- Legenda das cores usadas -->
+    <div class="legend">
+      <div class="legend-item">
+        <div class="color-sample sky"></div>
+        <div class="color-name">Céu</div>
+      </div>
+      <div class="legend-item">
+        <div class="color-sample cloud"></div>
+        <div class="color-name">Nuvem</div>
+      </div>
+      <div class="legend-item">
+        <div class="color-sample grass"></div>
+        <div class="color-name">Grama</div>
+      </div>
+      <div class="legend-item">
+        <div class="color-sample dirt"></div>
+        <div class="color-name">Terra</div>
+      </div>
+      <div class="legend-item">
+        <div class="color-sample stone"></div>
+        <div class="color-name">Pedra</div>
+      </div>
+      <div class="legend-item">
+        <div class="color-sample wood"></div>
+        <div class="color-name">Madeira</div>
+      </div>
+      <div class="legend-item">
+        <div class="color-sample char-head"></div>
+        <div class="color-name">Cabeça</div>
+      </div>
+      <div class="legend-item">
+        <div class="color-sample char-body"></div>
+        <div class="color-name">Corpo</div>
+      </div>
+      <div class="legend-item">
+        <div class="color-sample char-leg"></div>
+        <div class="color-name">Pernas</div>
+      </div>
+      <div class="legend-item">
+        <div class="color-sample water"></div>
+        <div class="color-name">Água</div>
+      </div>
+      <div class="legend-item">
+        <div class="color-sample tree"></div>
+        <div class="color-name">Árvore</div>
+      </div>
+      <div class="legend-item">
+        <div class="color-sample flower-red"></div>
+        <div class="color-name">Flor</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Aqui vamos definir nossa matriz de pixels
+    // Cada número representa uma cor diferente que será mapeada para uma classe CSS
+    // 0: vazio, 1: céu, 2: nuvem, 3: grama, 4: terra, 5: pedra
+    // 6: madeira, 7: cabeça, 8: corpo, 9: braço, 10: perna, 11: sombra
+    // 12: água, 13: árvore, 14: flor vermelha, 15: flor amarela, 16: preto
+    
+    const pixelMatrix = [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // Linha 0 - Céu
+      [1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1], // Linha 1 - Céu e algumas nuvens
+      [1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1], // Linha 2 - Céu e mais nuvens
+      [1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1], // Linha 3 - Céu e fim das nuvens
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // Linha 4 - Céu limpo
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // Linha 5 - Céu limpo
+      [1, 1, 1, 1, 1, 1, 13, 13, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // Linha 6 - Céu com topo da árvore
+      [1, 1, 1, 1, 1, 13, 13, 13, 13, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // Linha 7 - Céu com árvore
+      [1, 1, 1, 1, 1, 13, 13, 13, 13, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // Linha 8 - Céu com árvore
+      [1, 1, 1, 1, 1, 1, 6, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // Linha 9 - Céu com tronco de árvore
+      [3, 3, 3, 3, 3, 3, 6, 6, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], // Linha 10 - Linha de grama
+      [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 14, 3, 3, 3, 3], // Linha 11 - Terra com um pouco de grama e flor
+      [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 14, 15, 14, 3, 3, 3], // Linha 12 - Terra com grama e flores
+      [4, 4, 5, 5, 4, 4, 4, 4, 4, 4, 4, 4, 5, 4, 4, 15, 3, 3, 3, 12], // Linha 13 - Terra com pedras e início da água
+      [4, 5, 5, 5, 5, 4, 4, 4, 4, 7, 4, 4, 5, 5, 4, 4, 3, 12, 12, 12], // Linha 14 - Terra com pedras, cabeça do personagem e água
+      [4, 4, 5, 5, 4, 4, 4, 4, 9, 8, 9, 4, 4, 4, 4, 4, 12, 12, 12, 12], // Linha 15 - Terra, personagem (braços e corpo) e água
+      [4, 4, 4, 4, 4, 4, 4, 4, 4, 8, 4, 4, 4, 4, 4, 12, 12, 12, 12, 12], // Linha 16 - Terra, corpo do personagem e água
+      [4, 4, 4, 4, 4, 4, 4, 4, 10, 10, 4, 4, 4, 4, 12, 12, 12, 12, 12, 12], // Linha 17 - Terra, pernas do personagem e água
+      [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 12, 12, 12, 12, 12, 12, 12], // Linha 18 - Base de pedra e água
+      [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 12, 12, 12, 12, 12, 12, 12, 12]  // Linha 19 - Base de pedra e água
+    ];
+
+    // Mapeamento dos números para as classes CSS
+    const classMap = {
+      0: "",         // Vazio
+      1: "sky",      // Céu
+      2: "cloud",    // Nuvem
+      3: "grass",    // Grama
+      4: "dirt",     // Terra
+      5: "stone",    // Pedra
+      6: "wood",     // Madeira
+      7: "char-head", // Cabeça do personagem
+      8: "char-body", // Corpo do personagem
+      9: "char-arm",  // Braço do personagem
+      10: "char-leg", // Perna do personagem
+      11: "shadow",   // Sombra
+      12: "water",    // Água
+      13: "tree",     // Árvore
+      14: "flower-red", // Flor vermelha
+      15: "flower-yellow", // Flor amarela
+      16: "black"     // Preto para detalhes
+    };
+
+    // Função que constrói nossa pixel art com base na matriz
+    function buildPixelArt() {
+      const grid = document.getElementById('pixel-grid');
+      
+      // Para cada linha da matriz
+      for (let y = 0; y < pixelMatrix.length; y++) {
+        // Para cada coluna da linha atual
+        for (let x = 0; x < pixelMatrix[y].length; x++) {
+          // Cria um novo elemento div que será nosso pixel
+          const pixel = document.createElement('div');
+          
+          // Adiciona a classe 'pixel' ao elemento
+          pixel.classList.add('pixel');
+          
+          // Obtém o valor na posição atual da matriz
+          const colorValue = pixelMatrix[y][x];
+          
+          // Adiciona a classe de cor correspondente ao valor
+          if (colorValue > 0 && classMap[colorValue]) {
+            pixel.classList.add(classMap[colorValue]);
+          }
+          
+          // Adiciona o pixel ao grid
+          grid.appendChild(pixel);
+        }
+      }
+    }
+
+    // Chama a função para construir a pixel art quando a página carregar
+    window.onload = buildPixelArt;
+  </script>
+</body>
+</html>

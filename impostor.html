@@ -12,20 +12,20 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background-color: #878786;
+            background-color: #1a1a2e;
             font-family: Arial, sans-serif;
         }
 
         h1 {
-            color: #f7d705;
+            color: #ffffff;
             margin-bottom: 40px;
             text-align: center;
         }
 
         .container {
             position: relative;
-            width: 300px;
-            height: 400px;
+            width: 350px;
+            height: 450px;
         }
 
         /* Corpo principal */
@@ -54,14 +54,86 @@
 
         .leg-left {
             left: 50px;
-
-
         }
 
         .leg-right {
-            right: 50px;
+            right: 100px;
+        }
 
+        /* Faca - Cabo */
+        .knife-handle {
+            position: absolute;
+            width: 15px;
+            height: 60px;
+            background-color: #4d3a3a;
+            border-radius: 3px;
+            bottom: 160px;
+            right: 20px;
+            transform: rotate(45deg);
+            z-index: 4;
+        }
+        
+        /* Faca - Lâmina */
+        .knife-blade {
+            position: absolute;
+            width: 22px;
+            height: 120px;
+            background-color: #d9d9d9;
+            border-radius: 3px 3px 0 3px;
+            bottom: 190px;
+            right: -50px;
+            transform: rotate(45deg);
+            z-index: 4;
+        }
+        
+        /* Brilho da lâmina */
+        .knife-shine {
+            position: absolute;
+            width: 8px;
+            height: 110px;
+            background-color: #ffffff;
+            bottom: 195px;
+            right: -50px;
+            transform: rotate(45deg);
+            z-index: 5;
+        }
+        
+        /* Mão direita */
+        .hand-right {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            background-color: #ff0000;
+            border-radius: 50%;
+            bottom: 140px;
+            right: 5px;
+            z-index: 3;
+        }
 
+        /* Chapéu */
+        .hat {
+            position: absolute;
+            width: 120px;
+            height: 100px;
+            background-color: #333333;
+            border-radius: 50% 50% 0 0;
+            top: 0px;
+            left: 90px;
+            z-index: 3;
+            transform: rotate(-5deg);
+        }
+        
+        /* Aba do chapéu */
+        .hat-brim {
+            position: absolute;
+            width: 240px;
+            height: 25px;
+            background-color: #333333;
+            border-radius: 10px;
+            top: 95px;
+            left: 30px;
+            z-index: 3;
+            transform: rotate(-5deg);
         }
 
         /* Visor */
@@ -71,10 +143,9 @@
             height: 70px;
             background-color: #99dbf5;
             border-radius: 40px 70px 40px 40px;
-            top: 80px;
-            left: 100px;
+            top: 150px;
+            left: 120px;
             z-index: 2;
-            margin-top: 65px;
         }
 
         /* Reflexo do visor */
@@ -179,6 +250,18 @@
         <div class="leg leg-left"></div>
         <div class="leg leg-right"></div>
         
+        <!-- Chapéu -->
+        <div class="hat"></div>
+        <div class="hat-brim"></div>
+        
+        <!-- Mão -->
+        <div class="hand-right"></div>
+        
+        <!-- Faca -->
+        <div class="knife-handle"></div>
+        <div class="knife-blade"></div>
+        <div class="knife-shine"></div>
+        
         <!-- Visor -->
         <div class="visor">
             <div class="reflection"></div>
@@ -193,15 +276,54 @@
         <div class="color-btn" id="purple" onclick="changeColor('#800080')"></div>
     </div>
 
+    <div style="margin-top: 20px;">
+        <p style="color: white; text-align: center;">Cores do chapéu:</p>
+        <div class="color-buttons">
+            <div class="color-btn" style="background-color: #333333;" onclick="changeHat('#333333')"></div>
+            <div class="color-btn" style="background-color: #e74c3c;" onclick="changeHat('#e74c3c')"></div>
+            <div class="color-btn" style="background-color: #3498db;" onclick="changeHat('#3498db')"></div>
+            <div class="color-btn" style="background-color: #2ecc71;" onclick="changeHat('#2ecc71')"></div>
+        </div>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <p style="color: white; text-align: center; margin-bottom: 10px;">Modo de jogo:</p>
+        <button style="padding: 8px 15px; background-color: #ff6b6b; color: white; border: none; border-radius: 5px; cursor: pointer; margin-right: 10px;" onclick="toggleKnife(true)">Impostor</button>
+        <button style="padding: 8px 15px; background-color: #1dd1a1; color: white; border: none; border-radius: 5px; cursor: pointer;" onclick="toggleKnife(false)">Tripulante</button>
+    </div>
+
     <footer>
         <p>Exemplo educacional para demonstrar HTML e CSS</p>
     </footer>
+
+    <script>
+        // Mostrar ou esconder a faca
+        function toggleKnife(show) {
+            const knifeElements = ['.knife-handle', '.knife-blade', '.knife-shine', '.hand-right'];
+            const display = show ? 'block' : 'none';
+            
+            knifeElements.forEach(element => {
+                document.querySelector(element).style.display = display;
+            });
+            
+            // Mudar a cor do visor para vermelho se for impostor
+            if (show) {
+                document.querySelector('.visor').style.backgroundColor = '#ff6b6b';
+            } else {
+                document.querySelector('.visor').style.backgroundColor = '#99dbf5';
+            }
+        }
+        
+        // Esconder a faca inicialmente
+        toggleKnife(false);
+    </script>
 
     <script>
         function changeColor(color) {
             document.querySelector('.body').style.backgroundColor = color;
             document.querySelector('.leg-left').style.backgroundColor = color;
             document.querySelector('.leg-right').style.backgroundColor = color;
+            document.querySelector('.hand-right').style.backgroundColor = color;
             
             // Ajustar a cor da mochila para ser um pouco mais escura
             let darkColor = color;
@@ -212,6 +334,12 @@
             if (color === '#800080') darkColor = '#600060';
             
             document.querySelector('.backpack').style.backgroundColor = darkColor;
+        }
+
+        // Selecionar chapéus
+        function changeHat(hatColor) {
+            document.querySelector('.hat').style.backgroundColor = hatColor;
+            document.querySelector('.hat-brim').style.backgroundColor = hatColor;
         }
     </script>
 </body>

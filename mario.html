@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mario Pixel Art</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .pixel-art {
+            display: grid;
+            grid-template-columns: repeat(16, 20px);
+            grid-template-rows: repeat(16, 20px);
+            gap: 1px;
+            margin: 0 auto;
+        }
+        
+        .pixel {
+            width: 20px;
+            height: 20px;
+            background-color: transparent;
+        }
+        
+        /* Mario Colors */
+        .red { background-color: #FF0000; }
+        .skin { background-color: #FFCCAA; }
+        .brown { background-color: #6B4226; }
+        .blue { background-color: #0000FF; }
+        .black { background-color: #000000; }
+        .yellow { background-color: #FFFF00; }
+        .white { background-color: #FFFFFF; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mario Pixel Art</h1>
+        <div class="pixel-art" id="mario"></div>
+    </div>
+
+    <script>
+        // Criar a matriz 16x16 para o Mario
+        const mario = document.getElementById('mario');
+        
+        // Matriz representando a arte do Mario
+        // 0: vazio, 1: vermelho, 2: pele, 3: marrom, 4: azul, 5: preto, 6: amarelo, 7: branco
+        const marioPixels = [
+            [0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0],
+            [0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0],
+            [0,0,0,0,3,3,3,2,2,5,2,0,0,0,0,0],
+            [0,0,0,3,2,3,2,2,2,5,2,2,2,0,0,0],
+            [0,0,0,3,2,3,3,2,2,2,5,2,2,2,0,0],
+            [0,0,0,3,3,2,2,2,2,5,5,5,5,0,0,0],
+            [0,0,0,0,0,2,2,2,2,2,2,0,0,0,0,0],
+            [0,0,0,0,1,1,4,1,1,1,0,0,0,0,0,0],
+            [0,0,0,1,1,1,4,1,1,4,1,1,1,0,0,0],
+            [0,0,1,1,1,1,4,4,4,4,1,1,1,1,0,0],
+            [0,0,2,2,1,4,6,4,4,6,4,1,2,2,0,0],
+            [0,0,2,2,2,4,4,4,4,4,4,2,2,2,0,0],
+            [0,0,2,2,4,4,4,4,4,4,4,4,2,2,0,0],
+            [0,0,0,0,4,4,4,0,0,4,4,4,0,0,0,0],
+            [0,0,0,3,3,3,0,0,0,0,3,3,3,0,0,0],
+            [0,0,3,3,3,3,0,0,0,0,3,3,3,3,0,0]
+        ];
+        
+        // Classes de cores para cada número
+        const colorClasses = [
+            '', 'red', 'skin', 'brown', 'blue', 'black', 'yellow', 'white'
+        ];
+        
+        // Preencher a matriz com os pixels
+        for (let y = 0; y < 16; y++) {
+            for (let x = 0; x < 16; x++) {
+                const pixel = document.createElement('div');
+                pixel.className = 'pixel';
+                
+                // Adicionar cor se não for transparente (0)
+                if (marioPixels[y][x] > 0) {
+                    pixel.classList.add(colorClasses[marioPixels[y][x]]);
+                }
+                
+                mario.appendChild(pixel);
+            }
+        }
+    </script>
+</body>
+</html>

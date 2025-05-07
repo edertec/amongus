@@ -12,12 +12,12 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background-color: #878786;
+            background-color: #1a1a2e;
             font-family: Arial, sans-serif;
         }
 
         h1 {
-            color: #f7d705;
+            color: #f46565;
             margin-bottom: 40px;
             text-align: center;
         }
@@ -25,7 +25,7 @@
         .container {
             position: relative;
             width: 300px;
-            height: 400px;
+            height: 450px;
         }
 
         /* Corpo principal */
@@ -44,7 +44,7 @@
         .leg {
             position: absolute;
             width: 70px;
-            height: 130px;
+            height: 190px;
             background-color: #ff0000;
             border-radius: 0 0 25px 25px;
             bottom: 0;
@@ -54,14 +54,36 @@
 
         .leg-left {
             left: 50px;
-
-
         }
 
         .leg-right {
             right: 50px;
+        }
 
-
+        /* Chapéu */
+        .hat {
+            position: absolute;
+            width: 120px;
+            height: 100px;
+            background-color: #333333;
+            border-radius: 50% 50% 0 0;
+            top: 0px;
+            left: 90px;
+            z-index: 3;
+            transform: rotate(-5deg);
+        }
+        
+        /* Aba do chapéu */
+        .hat-brim {
+            position: absolute;
+            width: 240px;
+            height: 25px;
+            background-color: #333333;
+            border-radius: 10px;
+            top: 95px;
+            left: 30px;
+            z-index: 3;
+            transform: rotate(-5deg);
         }
 
         /* Visor */
@@ -71,10 +93,9 @@
             height: 70px;
             background-color: #99dbf5;
             border-radius: 40px 70px 40px 40px;
-            top: 80px;
-            left: 100px;
+            top: 150px;
+            left: 120px;
             z-index: 2;
-            margin-top: 65px;
         }
 
         /* Reflexo do visor */
@@ -179,6 +200,10 @@
         <div class="leg leg-left"></div>
         <div class="leg leg-right"></div>
         
+        <!-- Chapéu -->
+        <div class="hat"></div>
+        <div class="hat-brim"></div>
+        
         <!-- Visor -->
         <div class="visor">
             <div class="reflection"></div>
@@ -191,6 +216,16 @@
         <div class="color-btn" id="green" onclick="changeColor('#00ff00')"></div>
         <div class="color-btn" id="yellow" onclick="changeColor('#ffff00')"></div>
         <div class="color-btn" id="purple" onclick="changeColor('#800080')"></div>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <p style="color: white; text-align: center;">Cores do chapéu:</p>
+        <div class="color-buttons">
+            <div class="color-btn" style="background-color: #333333;" onclick="changeHat('#333333')"></div>
+            <div class="color-btn" style="background-color: #e74c3c;" onclick="changeHat('#e74c3c')"></div>
+            <div class="color-btn" style="background-color: #3498db;" onclick="changeHat('#3498db')"></div>
+            <div class="color-btn" style="background-color: #2ecc71;" onclick="changeHat('#2ecc71')"></div>
+        </div>
     </div>
 
     <footer>
@@ -212,6 +247,12 @@
             if (color === '#800080') darkColor = '#600060';
             
             document.querySelector('.backpack').style.backgroundColor = darkColor;
+        }
+
+        // Selecionar chapéus
+        function changeHat(hatColor) {
+            document.querySelector('.hat').style.backgroundColor = hatColor;
+            document.querySelector('.hat-brim').style.backgroundColor = hatColor;
         }
     </script>
 </body>
